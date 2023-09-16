@@ -1,0 +1,28 @@
+# quarkus http configs
+quarkus:
+  http:
+    port: 8095
+
+# keycloak security configs
+  oidc:
+    auth-server-url: http://localhost:8180/realms/quarkus
+    client-id: backend-service
+    credentials:
+      secret: secret
+  oidc-client:
+    auth-server-url: ${quarkus.oidc.auth-server-url}
+    client-id: ${quarkus.oidc.client-id}
+    credentials:
+      secret: ${quarkus.oidc.credentials.secret}
+    grant:
+      type: password
+
+# swagger-ui configs
+  swagger-ui:
+    always-include: true
+  smallrye-openapi:
+    info-description: 'BR Mineradora: Ore trading - Back-End for Front-End (BFF) - API'
+
+# REST client configs
+org.br.mineradora.client.ProposalRestClient/mp-rest/url: http://localhost:8091
+org.br.mineradora.client.ReportRestClient/mp-rest/url: http://localhost:8081
